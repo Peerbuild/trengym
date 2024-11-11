@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "tailwind": {
+    "config": "tailwind.config.ts",
+    "css": "src/globals.css",
+    "baseColor": "zinc",
+    "cssVariables": true
+  },
+  "rsc": true,
+  "tsx": true,
+  "aliases": {
+    "utils": "@trengym/ui/lib/utils",
+    "components": "@trengym/ui/components",
+    "ui": "src/components/web",
+    "lib": "@trengym/ui/lib",
+    "hooks": "@trengym/ui/hooks"
+  }
+}
