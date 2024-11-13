@@ -5,7 +5,12 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "lint:api": "turbo lint --filter=api",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format:check:web": "prettier --check \"apps/web/**/*.{ts,tsx,md}\"",
+    "format:check:api": "prettier --check \"apps/api/**/*.{ts,tsx,md}\"",
+    "build:web": "turbo build --filter=web",
+    "e2e:api": "turbo test:e2e --filter=api"
   },
   "devDependencies": {
     "prettier": "^3.2.5",

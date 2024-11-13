@@ -10,7 +10,11 @@
     "lint": {
       "dependsOn": ["^lint"]
     },
+    "test:e2e": {
+      "dependsOn": ["build"]
+    },
     "dev": {
+      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     }
