@@ -5,6 +5,8 @@
   "exports": {
     "./postcss.config": "./postcss.config.mjs",
     "./tailwind.config.ts": "./tailwind.config.ts",
+    "./tailwind.web.config.ts": "./tailwind.web.config.ts",
+    "./tailwind.mobile.config.ts": "./tailwind.mobile.config.ts",
     "./lib/*": "./src/lib/*.ts",
     "./hooks/*": "./src/hooks/*.ts",
     "./components/*": "./src/components/web/*.tsx",
