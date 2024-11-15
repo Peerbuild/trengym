@@ -1,9 +1,8 @@
 import type { Config } from "tailwindcss";
-import globalConfig from "@trengym/ui/tailwind.config.ts";
+import globalConfig from "@trengym/ui/tailwind.mobile.config.ts";
 
 const config: Config = {
   ...globalConfig,
-  presets: [require("nativewind/preset")],
 };
 
 export default config;

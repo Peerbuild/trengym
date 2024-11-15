@@ -6,7 +6,7 @@ const Text = ({
   children,
   className,
 }: {
-  className: string;
+  className?: string;
   children: React.ReactNode;
 }) => {
   return (
