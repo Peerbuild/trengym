@@ -8,9 +8,8 @@ const HomeScreen = () => {
   return (
     <Theme>
       <View className="flex-1 justify-start gap-2 px-10 pt-60">
-        <Text className="text-xl">Member</Text>
-        <Text className="text-3xl">TrenGym</Text>
-        <Text className="text-lg">
+        <Text className="text-xl">TrenGym</Text>
+        <Text className="text-base">
           An app brought you by <Text className="font-bold">Peerbuild</Text>
         </Text>
         <Link href="/onboarding" asChild>
