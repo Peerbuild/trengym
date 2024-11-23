@@ -1,11 +1,22 @@
-service: serverless-app
+service: api
 
 plugins:
+  - serverless-offline-sqs
   - serverless-offline
+
+custom:
+  serverless-offline-sqs:
+    autoCreate: true
+    apiVersion: '2024-11-21'
+    endpoint: http://0.0.0.0:9324
+    region: eu-west-3
+    skipCacheInvalidation: false
 
 provider:
   name: aws
   runtime: nodejs18.x
+  region: eu-west-3
+  profile: trengym
 
 functions:
   main:
