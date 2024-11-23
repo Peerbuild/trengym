@@ -7,14 +7,15 @@
   "scripts": {
     "build": "tsc"
   },
-  "devDependencies": {
-    "@trengym/typescript-config": "workspace:*"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-sqs": "^3.696.0",
-    "@aws-sdk/credential-providers": "^3.696.0"
+    "@aws-sdk/credential-providers": "^3.696.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@trengym/typescript-config": "workspace:*"
   }
 }
