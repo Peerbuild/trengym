@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create.user';
+import { createEvent } from 'src/common/event';
 
 @Injectable()
 export class UserService {
@@ -29,7 +30,7 @@ export class UserService {
   }
 
   async approveUser(userId: string) {
-    const { id } = await this.getUserById(userId);
+    const { id, email, name } = await this.getUserById(userId);
 
     await this.prisma.user.update({
       where: {
@@ -37,6 +38,16 @@ export class UserService {
       },
       data: {
         isApproved: true,
+      },
+    });
+
+    await createEvent({
+      eventType: 'accountConfirmation',
+      recipient: {
+        email,
+      },
+      variables: {
+        name,
       },
     });
 
