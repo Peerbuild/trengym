@@ -1,11 +1,11 @@
+import { createEvent } from '@/common/event';
+import { PrismaService } from '@/prisma/prisma.service';
 import {
   BadRequestException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create.user';
-import { createEvent } from 'src/common/event';
 
 @Injectable()
 export class UserService {
