@@ -10,22 +10,21 @@ provider:
   region: eu-west-3
   profile: trengym
 
-functions:
-  compute:
-    handler: dist/main.ts
-    events:
-      - sqs:
-          arn:
-            Fn::GetAtt:
-              - transactionQueue
-              - Arn
-          batchSize: 10
-          functionResponseType: ReportBatchItemFailures
+constructs:
+  smsQueue:
+    type: queue
+    fifo: true
+    worker:
+      handler: dist/services/sms.handler
+      environment:
+        TWILIO_ACCOUNT_SID: ${env:TWILIO_ACCOUNT_SID}
+        TWILIO_AUTH_TOKEN: ${env:TWILIO_AUTH_TOKEN}
+      functionResponseType: ReportBatchItemFailures
+      timeout: 15
 
-resources:
-  Resources:
-    transactionQueue:
-      Type: AWS::SQS::Queue
-      Properties:
-        QueueName: transactionQueue.fifo
-        FifoQueue: true
+  transactionQueue:
+    type: queue
+    fifo: true
+    worker:
+      handler: dist/main.handler
+      functionResponseType: ReportBatchItemFailures
