@@ -8,7 +8,8 @@
     "build": "tsc"
   },
   "devDependencies": {
-    "@trengym/typescript-config": "workspace:*"
+    "@trengym/typescript-config": "workspace:*",
+    "@trengym/eslint-config": "workspace:*"
   },
   "keywords": [],
   "author": "",

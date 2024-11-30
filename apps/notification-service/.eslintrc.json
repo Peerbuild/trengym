@@ -1,0 +1,7 @@
+{
+  "extends": ["@trengym/eslint-config/library.js"],
+  "rules": {
+    "no-console": "off",
+    "no-await-in-loop": "off"
+  }
+}

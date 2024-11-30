@@ -1,0 +1,3 @@
+{
+  "extends": ["@trengym/eslint-config/library.js"]
+}

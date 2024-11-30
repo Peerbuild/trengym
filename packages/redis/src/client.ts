@@ -1,27 +1,19 @@
-import IORedis, { RedisOptions } from "ioredis";
+import IORedis, { type RedisOptions } from 'ioredis'
 
 const redisConfig: RedisOptions = {
   port: 6379,
-  host: "localhost",
+  host: 'localhost',
   maxRetriesPerRequest: null,
-  lazyConnect: true,
-};
+  lazyConnect: true
+}
 
-let redisConnection: IORedis | null = null;
+let redisConnection: IORedis | null = null
 
 const getRedisConnection = (): IORedis => {
   if (!redisConnection) {
-    redisConnection = new IORedis(redisConfig);
-
-    redisConnection.on("connect", () => {
-      console.log("Connected to Redis");
-    });
-
-    redisConnection.on("error", (error) => {
-      console.error("Error in Redis Connection", error);
-    });
+    redisConnection = new IORedis(redisConfig)
   }
-  return redisConnection;
-};
+  return redisConnection
+}
 
-export default getRedisConnection;
+export default getRedisConnection
