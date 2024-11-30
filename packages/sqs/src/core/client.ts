@@ -6,9 +6,10 @@ import {
 import { z } from "zod";
 import { fromIni } from "@aws-sdk/credential-providers";
 
-const baseQueueUrl = "https://sqs.eu-west-3.amazonaws.com/767397681312/";
+const baseQueueUrl =
+  "https://sqs.eu-west-3.amazonaws.com/767397681312/notification-service-dev-";
 
-const accountConfirmationSchema = z.object({
+export const accountConfirmationSchema = z.object({
   eventType: z.literal("accountConfirmation"),
   recipient: z.object({
     email: z.string().email(),
@@ -18,7 +19,7 @@ const accountConfirmationSchema = z.object({
   }),
 });
 
-const smsVerificationSchema = z.object({
+export const smsVerificationSchema = z.object({
   eventType: z.literal("smsVerification"),
   recipient: z.object({
     phoneNumber: z.string(),
@@ -28,28 +29,55 @@ const smsVerificationSchema = z.object({
   }),
 });
 
-const emailMessageSchema = z.discriminatedUnion("eventType", [
+export const isEmailMessage = (
+  message: z.infer<typeof transactionMessageSchema>
+): message is EmailMessageType => {
+  const { success } = emailMessageSchema.safeParse(message);
+  return success;
+};
+
+export const isSmsMessage = (
+  message: z.infer<typeof transactionMessageSchema>
+): message is SmsMessageType => {
+  const { success } = smsMessageSchema.safeParse(message);
+  return success;
+};
+
+export const emailMessageSchema = z.discriminatedUnion("eventType", [
   accountConfirmationSchema,
 ]);
 type EmailMessageType = z.infer<typeof emailMessageSchema>;
 
-const smsMessageSchema = z.discriminatedUnion("eventType", [
+export const smsMessageSchema = z.discriminatedUnion("eventType", [
   smsVerificationSchema,
 ]);
 type SmsMessageType = z.infer<typeof smsMessageSchema>;
 
-const queue = {
-  transaction: `${baseQueueUrl}transactionQueue.fifo`,
-  email: `${baseQueueUrl}emailQueue.fifo`,
-};
+export const transactionMessageSchema = z.union([
+  emailMessageSchema,
+  smsMessageSchema,
+]);
 
-type QueueType = keyof typeof queue;
-
-export interface Message extends Record<QueueType, any> {
-  transaction: EmailMessageType | SmsMessageType;
+export type Message = {
+  transaction: z.infer<typeof transactionMessageSchema>;
   email: EmailMessageType;
   sms: SmsMessageType;
-}
+};
+
+export type BaseQueueUrl =
+  `https://sqs.${string}.amazonaws.com/${string}/notification-service-dev-`;
+
+export type FifoQueueUrl<T extends string> = `${BaseQueueUrl}${T}Queue.fifo`;
+
+export type QueueConfig = {
+  [K in keyof Message]: FifoQueueUrl<K>;
+};
+
+export const queue: QueueConfig = {
+  transaction: `${baseQueueUrl}transactionQueue.fifo`,
+  email: `${baseQueueUrl}emailQueue.fifo`,
+  sms: `${baseQueueUrl}smsQueue.fifo`,
+};
 
 export class SQS {
   private client: SQSClient;
@@ -62,7 +90,11 @@ export class SQS {
     });
   }
 
-  async sendMessage<T extends QueueType>(queueName: T, message: Message[T]) {
+  async sendMessage<T extends keyof Message>(
+    queueName: T,
+    message: Message[T]
+  ) {
+    console.log(queue[queueName]);
     const command = new SendMessageCommand({
       QueueUrl: queue[queueName],
       MessageBody: JSON.stringify(message),
