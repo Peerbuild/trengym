@@ -1,37 +1,37 @@
-import { Gender } from '@trengym/db';
+import { Gender } from '@trengym/db'
 import {
   IsEmail,
   IsEnum,
   IsNumber,
   IsOptional,
   IsPhoneNumber,
-  IsString,
-} from 'class-validator';
+  IsString
+} from 'class-validator'
 
 export class CreateUserDto {
   @IsString()
   @IsOptional()
-  name?: string;
+  name?: string
 
   @IsEmail()
-  email: string;
+  email: string
 
   @IsPhoneNumber()
-  phone: string;
+  phone: string
 
   @IsEnum(Gender)
   @IsOptional()
-  gender?: Gender;
+  gender?: Gender
 
   @IsNumber()
   @IsOptional()
-  age?: number;
+  age?: number
 
   @IsNumber()
   @IsOptional()
-  weight?: number;
+  weight?: number
 
   @IsNumber()
   @IsOptional()
-  height?: number;
+  height?: number
 }
