@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev": "tsc -w",
     "deploy": "pnpm run build && pnpx dotenv-cli -e ../../.env -- serverless deploy",
-    "start": "pnpm run build && pnpx dotenv-cli -e ../../.env -- serverless dev"
+    "dev": "pnpm run build && pnpx dotenv-cli -e ../../.env -- serverless dev"
   },
   "devDependencies": {
     "@trengym/typescript-config": "workspace:*",
