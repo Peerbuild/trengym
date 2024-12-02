@@ -19,9 +19,6 @@ export const smsVerificationSchema = z.object({
   eventType: z.literal('smsVerification'),
   recipient: z.object({
     phoneNumber: z.string()
-  }),
-  variables: z.object({
-    code: z.string()
   })
 })
 
