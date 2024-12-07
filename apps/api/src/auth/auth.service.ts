@@ -29,10 +29,16 @@ export class AuthService {
 
   async signIn({ email, phone }: SigninAuthDto) {
     // check if user exists with this email and phone and approved
-    const user = await getUserByIdOrEmailOrPhone(this.prisma, {
-      email,
-      phone
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email,
+        phone
+      }
     })
+
+    if (!user) {
+      throw new NotFoundException('User not found')
+    }
 
     // create a new accountVerification Event for this user
     await createEvent({

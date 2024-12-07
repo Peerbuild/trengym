@@ -20,8 +20,6 @@ export const jwtExtractor = (
 ) => {
   let token = null
 
-  console.log(req)
-
   const hasBearerToken =
     req.headers.authorization && req.headers.authorization.startsWith('Bearer ')
 
