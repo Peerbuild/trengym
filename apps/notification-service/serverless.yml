@@ -20,7 +20,6 @@ constructs:
         TWILIO_ACCOUNT_SID: ${env:TWILIO_ACCOUNT_SID}
         TWILIO_AUTH_TOKEN: ${env:TWILIO_AUTH_TOKEN}
       functionResponseType: ReportBatchItemFailures
-      timeout: 15
 
   transactionQueue:
     type: queue
