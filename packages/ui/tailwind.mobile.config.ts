@@ -9,38 +9,30 @@ const config: Config = {
     ...mainConfig.theme,
     fontSize: {
       xs: [
-        '0.75rem',
+        '11px',
         {
-          lineHeight: '0.875rem'
+          lineHeight: '17px',
+          fontWeight: '510'
         }
       ],
       sm: [
-        '0.875rem',
+        '14px',
         {
-          lineHeight: '0.875rem',
-          fontWeight: '500'
-        }
-      ],
-      'md-semibold': [
-        '0.875rem',
-        {
-          lineHeight: '1.25rem',
-          fontWeight: '500'
-        }
-      ],
-      md: [
-        '0.875rem',
-        {
-          lineHeight: '1.25rem',
+          lineHeight: '16px',
           fontWeight: '400'
         }
       ],
-      base: ['1rem', { lineHeight: '1.5rem', fontWeight: '400' }],
-      'base-medium': ['1rem', { lineHeight: '1.5rem', fontWeight: '500' }],
-      lg: ['1.125rem', { lineHeight: '1.75rem', fontWeight: '600' }],
+      md: [
+        '15px',
+        {
+          lineHeight: '18px',
+          fontWeight: '274'
+        }
+      ],
+      base: ['16px', { lineHeight: '19px', fontWeight: '400' }],
+      lg: ['18px', { lineHeight: '21px', fontWeight: '400' }],
       xl: ['1.5rem', { lineHeight: '2rem', fontWeight: '600' }],
-      '2xl': ['1.875rem', { lineHeight: '2.25rem', fontWeight: '600' }],
-      '3xl': ['3rem', { lineHeight: '3rem', fontWeight: '800' }]
+      '2xl': ['30px', { lineHeight: '36px', fontWeight: '700' }]
     },
     borderRadius: {
       none: '0',
