@@ -19,7 +19,7 @@
     "@prisma/client": "^5.19.1"
   },
   "devDependencies": {
-    "prisma": "^5.19.1",
-    "@trengym/typescript-config": "workspace:*"
+    "@trengym/typescript-config": "workspace:*",
+    "prisma": "^5.19.1"
   }
 }
