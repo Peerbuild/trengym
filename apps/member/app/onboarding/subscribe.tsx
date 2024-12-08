@@ -3,7 +3,7 @@ import { Theme } from "@/components/Theme";
 import Text from "@/components/Text";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Image, View } from "react-native";
-import RadioItem from "@/components/Radio";
+import { RadioItem } from "@/components/Radio";
 import { LinearGradient } from "expo-linear-gradient";
 import Button from "@/components/Button";
 
@@ -39,7 +39,7 @@ const Subscribe = () => {
           </Text>
         </View>
         <View className="gap-5">
-          <RadioItem className="rounded-lg bg-secondary p-4">
+          <RadioItem value="MONTHLY" className="rounded-lg bg-secondary p-4">
             <View className="flex-1 flex-row items-center justify-between">
               <View>
                 <Text className="text-lg">Monthly</Text>
@@ -54,7 +54,7 @@ const Subscribe = () => {
               </View>
             </View>
           </RadioItem>
-          <RadioItem className="rounded-lg bg-secondary p-4">
+          <RadioItem value="YEARLY" className="rounded-lg bg-secondary p-4">
             <View className="flex-1 flex-row items-center justify-between">
               <View>
                 <Text className="text-lg">Yearly</Text>

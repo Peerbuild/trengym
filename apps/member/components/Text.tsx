@@ -10,7 +10,7 @@ const Text = ({
   children: React.ReactNode;
 }) => {
   return (
-    <NativeText className={cn("text-foreground", className)}>
+    <NativeText className={cn("text-base text-foreground", className)}>
       {children}
     </NativeText>
   );

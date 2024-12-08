@@ -12,7 +12,7 @@ const HomeScreen = () => {
         <Text className="text-base">
           An app brought you by <Text className="font-bold">Peerbuild</Text>
         </Text>
-        <Link href="/onboarding" asChild>
+        <Link href="/auth" asChild>
           <Pressable className="mt-4 w-full rounded-lg bg-blue-800 p-4 text-blue-300">
             <Text className="text-center">Go To Onboarding</Text>
           </Pressable>
