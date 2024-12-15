@@ -17,7 +17,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@trengym/redis": "workspace:*",
     "@trengym/sqs": "workspace:*",
     "aws-lambda": "^1.0.7",
     "twilio": "^5.3.6",

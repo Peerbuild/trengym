@@ -1,4 +1,3 @@
-import { disconnect, setCache } from '@trengym/redis'
 import { smsMessageSchema } from '@trengym/sqs'
 import { type SQSHandler } from 'aws-lambda'
 import twilio from 'twilio'
@@ -30,17 +29,9 @@ export const handler: SQSHandler = async (event) => {
         })
 
       console.log('Message sent:', response)
-
-      await setCache(
-        'verificationToken',
-        data.recipient.phoneNumber,
-        response.sid
-      )
     } catch (error) {
       console.error('Error processing message:', error)
       continue
     }
   }
-
-  await disconnect()
 }

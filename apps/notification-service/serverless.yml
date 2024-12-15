@@ -1,14 +1,22 @@
 service: notification-service
 
 plugins:
-  - serverless-offline
   - serverless-lift
 
 provider:
   name: aws
   runtime: nodejs18.x
   region: eu-west-3
-  profile: trengym
+  logs:
+    lambda:
+      logFormat: JSON
+      applicationLogLevel: DEBUG
+      systemLogLevel: WARN
+
+build:
+  esbuild:
+    exclude:
+      - '@aws-sdk/*'
 
 constructs:
   smsQueue:
