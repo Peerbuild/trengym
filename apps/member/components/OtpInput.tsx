@@ -29,6 +29,7 @@ export default function OTPInput(props: OTPInputProps): React.JSX.Element {
 
     if (text.length > 0) {
       if (index < length - 1) {
+        inputRefs.current[index + 1]?.focus();
         setCurrentIndex(index + 1);
       }
       return;
@@ -73,7 +74,6 @@ export default function OTPInput(props: OTPInputProps): React.JSX.Element {
             value={value[ind]}
             onChangeText={(text) => handleChange(text, ind)}
             onKeyPress={(e) => handleBackspacePress(e, ind)}
-            editable={ind === currentIndex || value[ind] === ""}
           />
         );
       })}

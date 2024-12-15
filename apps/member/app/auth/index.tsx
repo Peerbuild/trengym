@@ -1,8 +1,14 @@
 import React from "react";
 import { SigninRequest } from "@trengym/api-client";
 import { Theme } from "@/components/Theme";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Image, KeyboardAvoidingView, Platform, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  StatusBar,
+  View,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Button from "@/components/Button";
 import Text from "@/components/Text";
@@ -12,8 +18,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { useMutation } from "@tanstack/react-query";
-import { Redirect, router, Stack } from "expo-router";
+import { router } from "expo-router";
 import { useApiClient } from "@/providers/ApiClientProvider";
+import { useColorScheme } from "nativewind";
 
 const BgImage = require("../../assets/images/onboarding.png");
 
@@ -25,8 +32,11 @@ const signinSchema = z.object({
 const SignInPage = () => {
   const apiClient = useApiClient();
   const mutation = useMutation({
-    mutationFn: (data: SigninRequest) => {
-      return apiClient.auth.signin(data);
+    mutationFn: async (data: SigninRequest) => {
+      return await apiClient.auth.signin(data);
+    },
+    onError: (error) => {
+      console.log(JSON.stringify(error.message));
     },
     onSuccess: (data: void, variables) => {
       router.push({
@@ -37,22 +47,24 @@ const SignInPage = () => {
       });
     },
   });
+  const { colorScheme } = useColorScheme();
   const form = useForm<z.infer<typeof signinSchema>>({
     resolver: zodResolver(signinSchema),
   });
   const onSubmit = (data: z.infer<typeof signinSchema>) => {
+    console.log(JSON.stringify(data));
     mutation.mutate(data);
   };
 
   return (
     <Theme>
-      <KeyboardAvoidingView
-        className="flex-1"
-        behavior={Platform.OS === "ios" ? "position" : undefined}
-      >
+      <KeyboardAvoidingView className="flex-1">
         <View className="h-[30rem]">
           <LinearGradient
-            colors={["transparent", "#1c1c1e"]}
+            colors={[
+              "transparent",
+              colorScheme === "dark" ? "#1c1c1e" : "#fff",
+            ]}
             style={{
               position: "absolute",
               top: 0,
@@ -68,7 +80,7 @@ const SignInPage = () => {
             className="-z-10 h-full w-full object-cover"
           />
         </View>
-        <SafeAreaView className="mt-auto gap-16 px-6">
+        <View className="mt-auto gap-16 px-6">
           <View className="gap-8">
             <Text className="text-2xl">Welcome to Citadel</Text>
             <Text className="text-lg text-muted-foreground">
@@ -116,12 +128,12 @@ const SignInPage = () => {
             isLoading={mutation.isPending}
             // onPressIn={form.handleSubmit(onSubmit)}
             onPressIn={() => {
-              router.push("/onboarding/gender");
+              router.push("/onboarding/success");
             }}
           >
             Login
           </Button>
-        </SafeAreaView>
+        </View>
       </KeyboardAvoidingView>
     </Theme>
   );

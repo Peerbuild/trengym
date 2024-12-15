@@ -1,12 +1,16 @@
 import React, { createContext, useContext } from "react";
 import { ApiClient } from "@trengym/api-client";
+import { useAuth } from "./AuthProvider";
 
 const ApiClientContext = createContext<ApiClient | null>(null);
 
 export const ApiClientProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const apiClient = new ApiClient({});
+  const { session } = useAuth();
+  const apiClient = new ApiClient({
+    accessToken: session?.access_token,
+  });
 
   return (
     <ApiClientContext.Provider value={apiClient}>

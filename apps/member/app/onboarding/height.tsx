@@ -1,48 +1,48 @@
 import Text from "@/components/Text";
-import { View } from "react-native";
 import WheelPicker from "@quidone/react-native-wheel-picker";
-import Button from "@/components/Button";
-import { useState } from "react";
 import { cn } from "@trengym/ui/lib/utils";
-import { useApiClient } from "@/providers/ApiClientProvider";
+import { View } from "react-native";
+import React, { useState } from "react";
+import Button from "@/components/Button";
 import { useMutation } from "@tanstack/react-query";
+import { useApiClient } from "@/providers/ApiClientProvider";
 import { router } from "expo-router";
 import ScreenContainer from "@/components/ScreenContainer";
 
-const data = [...Array(100 - 15).keys()].map((index) => ({
-  value: index + 15,
-  label: (index + 15).toString(),
+const data = [...Array(100).keys()].map((index) => ({
+  value: index + 120,
+  label: (index + 120).toString(),
 }));
 
-export default function AgePage(): React.JSX.Element {
-  const [age, setAge] = useState(0);
+export default function HeightPage(): React.JSX.Element {
   const apiClient = useApiClient();
+  const [height, setHeight] = useState(0);
 
   const mutation = useMutation({
     mutationFn: async () => {
       return await apiClient.user.updateSelf({
-        age,
+        height,
       });
     },
     onSuccess: () => {
-      router.push("/onboarding/weight");
+      router.push("/onboarding/success");
     },
   });
 
   return (
     <ScreenContainer>
       <View className="gap-2">
-        <Text className="text-2xl">Specify Age</Text>
+        <Text className="text-2xl">Specify Height</Text>
         <Text className="text-base text-muted-foreground">
           This info lets us customize your workout routines
         </Text>
       </View>
       <View className="flex-1 items-center justify-center">
         <WheelPicker
-          value={age}
-          width={100}
+          value={height}
+          width={80}
           onValueChanging={({ item }) => {
-            setAge(item.value);
+            setHeight(item.value);
           }}
           data={data}
           itemHeight={65}
@@ -64,6 +64,9 @@ export default function AgePage(): React.JSX.Element {
                 style={{ height: itemHeight }}
               >
                 <View className="h-full self-stretch border-y-[4px] border-primary" />
+                <Text className="absolute left-full ml-2 text-2xl text-primary">
+                  Cm
+                </Text>
               </View>
             );
           }}

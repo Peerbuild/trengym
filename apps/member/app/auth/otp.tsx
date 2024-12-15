@@ -10,8 +10,10 @@ import { useMutation } from "@tanstack/react-query";
 import { VerifyCodeRequest } from "@trengym/api-client";
 import { router } from "expo-router";
 import { useApiClient } from "@/providers/ApiClientProvider";
+import { useAuth } from "@/providers/AuthProvider";
 
 export default function Otp() {
+  const { setSession } = useAuth();
   const { phone } = useLocalSearchParams<{ phone: string }>();
   const apiClient = useApiClient();
 
@@ -20,6 +22,7 @@ export default function Otp() {
       return await apiClient.auth.verifyCode(data);
     },
     onSuccess: (data) => {
+      setSession(data);
       router.push({
         pathname: "/onboarding/profile",
         params: {
