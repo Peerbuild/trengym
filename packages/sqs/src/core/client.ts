@@ -1,6 +1,5 @@
 import { SendMessageCommand, SQSClient } from '@aws-sdk/client-sqs'
 import { z } from 'zod'
-import { fromIni } from '@aws-sdk/credential-providers'
 
 const baseQueueUrl =
   'https://sqs.eu-west-3.amazonaws.com/767397681312/notification-service-dev-'
@@ -76,9 +75,6 @@ export class SQS {
   private client: SQSClient
   constructor() {
     this.client = new SQSClient({
-      credentials: fromIni({
-        profile: 'trengym'
-      }),
       region: 'eu-west-3'
     })
   }
@@ -93,7 +89,11 @@ export class SQS {
       MessageGroupId: 'default-group',
       MessageDeduplicationId: new Date().getTime().toString()
     })
-
+    console.log('Environment variables:', {
+      region: process.env.AWS_REGION,
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      securityKey: process.env.AWS_SECRET_ACCESS_KEY
+    })
     await this.client.send(command)
   }
 }

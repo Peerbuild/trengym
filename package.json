@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "husky": "^9.1.7",
+    "patch-package": "^8.0.0",
     "prettier": "^3.2.5",
     "turbo": "^2.2.3",
     "typescript": "5.5.4"
@@ -23,5 +24,10 @@
   "packageManager": "pnpm@8.15.6",
   "engines": {
     "node": ">=18"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "react-native-picker-horizontal@0.1.2": "patches/react-native-picker-horizontal@0.1.2.patch"
+    }
   }
 }
