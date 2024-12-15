@@ -24,10 +24,5 @@
   "packageManager": "pnpm@8.15.6",
   "engines": {
     "node": ">=18"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "react-native-picker-horizontal@0.1.2": "patches/react-native-picker-horizontal@0.1.2.patch"
-    }
   }
 }
