@@ -15,10 +15,10 @@ export class ApiClient {
   }
 
   private async request<T>(url: string, options: RequestInit): Promise<T> {
-    const backendUrl = 'http://localhost:8000/api'
+    const backendUrl = 'http://192.168.137.196:8000/api'
     const headers = {
       'Content-Type': 'application/json',
-      Authorization: this.accessToken ?? '',
+      Authorization: this.accessToken ? `Bearer ${this.accessToken}` : '',
       ...options.headers
     }
 
