@@ -2,6 +2,7 @@
   "extends": "@trengym/typescript-config/expo.json",
   "compilerOptions": {
     "strict": true,
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./*"

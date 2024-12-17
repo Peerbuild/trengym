@@ -16,7 +16,7 @@ const Button = ({ children, isLoading, ...props }: ButtonProps) => {
     <Pressable
       {...props}
       disabled={isLoading}
-      className="group w-full flex-row justify-center gap-3 rounded-full bg-primary p-4 disabled:bg-primary/60"
+      className="group w-full flex-row justify-center gap-3 rounded-full bg-primary p-4 active:bg-primary/80 disabled:bg-primary/60"
     >
       {isLoading && <ActivityIndicator />}
       <Text className="text-center text-lg text-primary-foreground group-disabled:text-muted-foreground">

@@ -1,5 +1,5 @@
 import ScreenContainer from "@/components/ScreenContainer";
-import { router, Stack, useFocusEffect, useRouter } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import LottieView from "lottie-react-native";
 import React, { useEffect } from "react";
 import Animated, {
@@ -23,7 +23,8 @@ export default function SuccessPage(): React.JSX.Element {
 
   useEffect(() => {
     setTimeout(() => {
-      router.replace("/auth");
+      router.dismissAll();
+      router.replace("/(tabs)");
     }, 4000);
   }, [router]);
 

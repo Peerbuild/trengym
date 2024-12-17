@@ -18,9 +18,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 import { useMutation } from "@tanstack/react-query";
-import { router } from "expo-router";
+import { Redirect, router } from "expo-router";
 import { useApiClient } from "@/providers/ApiClientProvider";
 import { useColorScheme } from "nativewind";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useAuth } from "@/providers/AuthProvider";
 
 const BgImage = require("../../assets/images/onboarding.png");
 
@@ -30,6 +32,7 @@ const signinSchema = z.object({
 });
 
 const SignInPage = () => {
+  const { session } = useAuth();
   const apiClient = useApiClient();
   const mutation = useMutation({
     mutationFn: async (data: SigninRequest) => {
@@ -56,6 +59,10 @@ const SignInPage = () => {
     mutation.mutate(data);
   };
 
+  if (session) {
+    return <Redirect href={"/(tabs)/"} />;
+  }
+
   return (
     <Theme>
       <KeyboardAvoidingView className="flex-1">
@@ -80,7 +87,7 @@ const SignInPage = () => {
             className="-z-10 h-full w-full object-cover"
           />
         </View>
-        <View className="mt-auto gap-16 px-6">
+        <SafeAreaView className="mt-auto gap-16 px-6">
           <View className="gap-8">
             <Text className="text-2xl">Welcome to Citadel</Text>
             <Text className="text-lg text-muted-foreground">
@@ -133,7 +140,7 @@ const SignInPage = () => {
           >
             Login
           </Button>
-        </View>
+        </SafeAreaView>
       </KeyboardAvoidingView>
     </Theme>
   );

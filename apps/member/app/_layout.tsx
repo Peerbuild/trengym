@@ -21,13 +21,6 @@ export default function RootLayout() {
           <Theme>
             <Stack>
               <Stack.Screen
-                name="index"
-                redirect
-                options={{
-                  headerShown: false,
-                }}
-              />
-              <Stack.Screen
                 name="auth/index"
                 options={{
                   headerShown: false,
@@ -36,6 +29,12 @@ export default function RootLayout() {
               <Stack.Screen name="+not-found" />
               <Stack.Screen
                 name="onboarding"
+                options={{
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen
+                name="(tabs)"
                 options={{
                   headerShown: false,
                 }}
