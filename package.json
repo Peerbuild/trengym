@@ -5,9 +5,18 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "lint:api": "turbo lint --filter=api",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format:check:web": "prettier --check \"apps/web/**/*.{ts,tsx,md}\"",
+    "format:check:api": "prettier --check \"apps/api/**/*.{ts,tsx,md}\"",
+    "format:ui": "prettier --write \"packages/ui/src/**/*.{ts,tsx,md}\"",
+    "build:web": "turbo build --filter=web",
+    "e2e:api": "turbo test:e2e --filter=api",
+    "prepare": "husky"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
+    "patch-package": "^8.0.0",
     "prettier": "^3.2.5",
     "turbo": "^2.2.3",
     "typescript": "5.5.4"

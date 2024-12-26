@@ -1,0 +1,14 @@
+service: api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-west-3
+
+functions:
+  main:
+    handler: dist/serverless.handler
+    events:
+      - http:
+          method: any
+          path: /{any+}

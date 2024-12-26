@@ -1,0 +1,37 @@
+service: notification-service
+
+plugins:
+  - serverless-lift
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-west-3
+  logs:
+    lambda:
+      logFormat: JSON
+      applicationLogLevel: DEBUG
+      systemLogLevel: WARN
+
+build:
+  esbuild:
+    exclude:
+      - '@aws-sdk/*'
+
+constructs:
+  smsQueue:
+    type: queue
+    fifo: true
+    worker:
+      handler: dist/services/sms.handler
+      environment:
+        TWILIO_ACCOUNT_SID: ${env:TWILIO_ACCOUNT_SID}
+        TWILIO_AUTH_TOKEN: ${env:TWILIO_AUTH_TOKEN}
+      functionResponseType: ReportBatchItemFailures
+
+  transactionQueue:
+    type: queue
+    fifo: true
+    worker:
+      handler: dist/main.handler
+      functionResponseType: ReportBatchItemFailures

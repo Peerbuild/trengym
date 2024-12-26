@@ -1,0 +1,25 @@
+{
+  "name": "@trengym/db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "db:generate": "pnpx prisma generate",
+    "db:migrate": "pnpx dotenv-cli -e ../../.env -- pnpx prisma migrate dev",
+    "db:migrate-deploy": "pnpx dotenv-cli -e ../../.env -- pnpx prisma migrate deploy",
+    "db:migrate-test": "pnpx dotenv-cli -e ../../.env.test -- pnpx prisma migrate deploy",
+    "db:studio": "pnpx dotenv-cli -e ../../.env -- pnpx prisma studio",
+    "build": "pnpm db:generate && npx tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.19.1"
+  },
+  "devDependencies": {
+    "@trengym/typescript-config": "workspace:*",
+    "prisma": "^5.19.1"
+  }
+}

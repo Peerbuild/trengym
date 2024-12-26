@@ -1,0 +1,16 @@
+name: trengym-test
+
+services:
+  db:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: trengym-test
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
